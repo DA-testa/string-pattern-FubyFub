@@ -1,32 +1,62 @@
-# python3
+#Andrejs Vasiljevs 12 grupa 221RDB441
 
 def read_input():
-    # this function needs to aquire input both from keyboard and file
-    # as before, use capital i (input from keyboard) and capital f (input from file) to choose which input type will follow
+   
+    Input = input()
     
-    
-    # after input type choice
-    # read two lines 
-    # first line is pattern 
-    # second line is text in which to look for pattern 
-    
-    # return both lines in one return
-    
-    # this is the sample return, notice the rstrip function
-    return (input().rstrip(), input().rstrip())
+    if "I" in Input:
+        
+        pattern = input()
+        text = input()   
+    elif "F" in Input:
+        
+        with open ( "./tests/06", Input = "r" ) as file:   
+            
+            pattern = file.readline()
+            text = file.readline()  
+            
+    return (pattern.rstrip(), text.rstrip())
 
 def print_occurrences(output):
-    # this function should control output, it doesn't need any return
+    
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
-    # this function should find the occurances using Rabin Karp alghoritm 
+    
+    patlen = len( pattern )
+    texlen = len( text )
+    hp = ht = 0
+    rez = 1
+    arr = []
+    B = 13
+    Q = 256
+    
+    for i in range ( patlen ):
+        
+        ht = ( ht * B + ord( text[i] )) % Q
+        hp = ( hp * B + ord( pattern[i] )) % Q        
 
-    # and return an iterable variable
-    return [0]
+    for i in range( patlen - 1):
+        
+        rez = ( rez * B ) % Q
+        
+    for i in range( texlen - patlen + 1 ):
+        
+        if ht == hp:
+            
+            for j in range( patlen ):
+                
+                if pattern[j] != text[i + j]:
+                    
+                    break
+            else:
+                
+                arr.append( i )
+        if i - texlen - patlen:
+            
+            ht = ( B * ( ht - ord( text[i] ) * rez ) + ord( text[i + patlen] )) % Q
+            
+    return arr    
 
-
-# this part launches the functions
 if __name__ == '__main__':
     print_occurrences(get_occurrences(*read_input()))
-
