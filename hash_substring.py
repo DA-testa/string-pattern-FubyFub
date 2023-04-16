@@ -10,7 +10,7 @@ def read_input():
         text = input()   
     elif "F" in inp:
         
-        with open ( "./tests/06", inp = "r" ) as file:   
+        with open ( "./tests/06" ) as file:   
             
             pattern = file.readline()
             text = file.readline()  
