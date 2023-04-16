@@ -52,7 +52,7 @@ def get_occurrences(pattern, text):
             else:
                 
                 arr.append( i )
-        if i - texlen - patlen:
+        if i < texlen - patlen:
             
             ht = ( B * ( ht - ord( text[i] ) * rez ) + ord( text[i + patlen] )) % Q
             
