@@ -2,15 +2,15 @@
 
 def read_input():
    
-    Input = input()
+    inp = input()
     
-    if "I" in Input:
+    if "I" in inp:
         
         pattern = input()
         text = input()   
-    elif "F" in Input:
+    elif "F" in inp:
         
-        with open ( "./tests/06", Input = "r" ) as file:   
+        with open ( "./tests/06", inp = "r" ) as file:   
             
             pattern = file.readline()
             text = file.readline()  
